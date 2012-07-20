@@ -8,7 +8,7 @@ Joint Graphical Lasso
 Solve the Joint Graphical Lasso
 }
 \usage{
-JGL(Y,penalty="fused",lambda1,lambda2,rho=1,weights="equal",penalize.diagonal=FALSE,maxiter=500,tol=1e-5,warm=NULL,return.whole.theta=FALSE, screening="fast")
+JGL(Y,penalty="fused",lambda1,lambda2,rho=1,weights="equal",penalize.diagonal=FALSE,maxiter=500,tol=1e-5,warm=NULL,return.whole.theta=FALSE, screening="fast", truncate = 1e-5)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -49,9 +49,12 @@ If TRUE, each class's inverse covariance matrix is returned whole.  If FALSE, th
   \item{screening}{
 "fast" or "memory.efficient".  Use of "fast" is recommended unless the number of features prohibits storage of a pXp matrix.  For very high dimension data, screening="memory.efficient" will allow a solution with a much longer computation time.
 }
+  \item{truncate}{
+Defaults to 1e-5.  At convergence, all values of theta below this number will be set to zero.  
+}
 }
 \details{
-This function can solve both the Fused Graphical Lasso and the Joint Graphical Lasso.  
+This function can solve both the Fused Graphical Lasso and the Group Graphical Lasso.  
 }
 \value{
 \item{theta}{A list of the estimated inverse covariance matrices, over all nodes if return.whole.theta==TRUE and over only the connected nodes if return.whole.theta==FALSE}

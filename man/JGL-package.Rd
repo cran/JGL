@@ -11,8 +11,8 @@ Runs the Fused Graphical Lasso and the Group Graphical Lasso for network estimat
 \tabular{ll}{
 Package: \tab JGL\cr
 Type: \tab Package\cr
-Version: \tab 2.0\cr
-Date: \tab 2012-01-17\cr
+Version: \tab 2.3\cr
+Date: \tab 2013-04-16\cr
 License: \tab GPL (>= 2)\cr
 LazyLoad: \tab yes\cr
 }
@@ -20,7 +20,7 @@ The Fused Graphical Lasso (FGL) and the Group Graphical Lasso (GGL) are two meth
 A motivating example is the analysis of gene expression data from tumor and healthy cells: FGL and GGL allow joint estimation of gene expression conditional dependency networks in both cancer and healthy cells
 FGL is recommended over GGL for most purposes.  The function JGL can implement either of these methods.
 
-The JGL package includes a number of functions to help analyze estimated networks: net.summary(), subnetworks(), net.degree(), net.edges(), net.hubs(), net.neighbors(), and net.plot().  These functions rely on the igraph package.  
+The JGL package includes a number of functions to help analyze estimated networks: subnetworks(), net.degree(), net.edges(), net.hubs(), net.neighbors(), print.jgl() and plot.jgl().  These functions rely on the igraph package.  
 
 A large number of other functions are called by the above functions, and are not generally useful when called by the user.  
 }

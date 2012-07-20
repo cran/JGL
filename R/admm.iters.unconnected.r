@@ -78,7 +78,7 @@ admm.iters.unconnected = function(Y,lambda1,lambda2,penalty="fused",rho=1,rho.in
 	rho = rho * rho.increment
 	}
 	diff = 0; for(k in 1:K){diff = diff + sum(abs(theta[[k]]-Z[[k]]))}
-	out = list(theta=theta,diff=diff,iters=iter)
+	out = list(theta=theta,Z=Z,diff=diff,iters=iter)
 	return(out)
 }
 

@@ -1,6 +1,6 @@
 
 JGL <-
-function(Y,penalty="fused",lambda1,lambda2,rho=1,weights="equal",penalize.diagonal=FALSE,maxiter=500,tol=1e-5,warm=NULL,return.whole.theta=FALSE, screening="fast")
+function(Y,penalty="fused",lambda1,lambda2,rho=1,weights="equal",penalize.diagonal=FALSE,maxiter=500,tol=1e-5,warm=NULL,return.whole.theta=FALSE, screening="fast",truncate=1e-5)
 {
 	## initialize:
 	p = dim(Y[[1]])[2]
@@ -152,7 +152,7 @@ function(Y,penalty="fused",lambda1,lambda2,rho=1,weights="equal",penalize.diagon
 	# get the unconnected portion of theta:
 	if(sum(unconnected)>0) 
 	{
-		theta.unconnected = admm.iters.unconnected(Yu,lambda1=lam1.unconnected,lambda2=lam2.unconnected,penalty=penalty,rho=rho,weights=weights,maxiter=maxiter,tol=tol)$theta
+		theta.unconnected = admm.iters.unconnected(Yu,lambda1=lam1.unconnected,lambda2=lam2.unconnected,penalty=penalty,rho=rho,weights=weights,maxiter=maxiter,tol=tol)$Z
 		for(k in 1:K) { names(theta.unconnected[[k]])=dimnames(Y[[k]])[[2]][!connected] }
 	}
 	if(sum(unconnected)==0) {theta.unconnected = NULL}
@@ -188,7 +188,7 @@ function(Y,penalty="fused",lambda1,lambda2,rho=1,weights="equal",penalize.diagon
 		# run JGL on the block:
 		Thetabl = admm.iters(Ybl,lam1.bl,lam2.bl,penalty=penalty,rho=rho,weights=weights,penalize.diagonal=TRUE,maxiter=maxiter,tol=tol,warm=warm.bl)
 		# update Theta with Thetabl's results:
-		for(k in 1:K) {theta[[k]][connected.index[bl],connected.index[bl]] = Thetabl$theta[[k]]}   
+		for(k in 1:K) {theta[[k]][connected.index[bl],connected.index[bl]] = Thetabl$Z[[k]]}   
 	}}
 
 	# round very small theta entries down to zero:
@@ -196,7 +196,7 @@ function(Y,penalty="fused",lambda1,lambda2,rho=1,weights="equal",penalize.diagon
 	{
 	for(k in 1:K)
 	{
-		rounddown = abs(theta[[k]])<1e-5; diag(rounddown)=FALSE
+		rounddown = abs(theta[[k]])<truncate; diag(rounddown)=FALSE
 		theta[[k]]=theta[[k]]*(1-rounddown)
 	}}
 
