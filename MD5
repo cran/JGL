@@ -1,8 +1,8 @@
-21d15675fb0d1199c2df105e728091e6 *DESCRIPTION
+ddeb422a4644cd705907573377a351af *DESCRIPTION
 63b866b1e6782f531462810a218faabc *NAMESPACE
-a97f12c664cbb1121a66a03d3958f681 *R/JGL.r
+0cd6c9f9602c40b07b3d5ccdb35b8e66 *R/JGL.r
 ccb4fb778b9ce8fb47c214b2d4ac2189 *R/admm.iters.r
-64ba65d04719cf606639b4508d2da11c *R/admm.iters.unconnected.r
+4d77e5103dda4f1ef8a2350cc119eedb *R/admm.iters.unconnected.r
 006d080b499ff7669c11ca1f57fff8e3 *R/crit.R
 83ba2dcd0c58f2fd001def7ac9ca4b1c *R/dsgl.R
 b57880daf712b8cb4f647f5490958829 *R/flsa.general.R

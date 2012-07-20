@@ -8,6 +8,7 @@
 admm.iters.unconnected = function(Y,lambda1,lambda2,penalty="fused",rho=1,rho.increment=1,weights,maxiter = 1000,tol=1e-5,warm=NULL)
 {
 	K = length(Y)
+	for(k in 1:K){Y[[k]]=as.matrix(Y[[k]])}
 	p = dim(Y[[1]])[2]
 	n=weights
   
@@ -80,5 +81,4 @@ admm.iters.unconnected = function(Y,lambda1,lambda2,penalty="fused",rho=1,rho.in
 	out = list(theta=theta,diff=diff,iters=iter)
 	return(out)
 }
-
 

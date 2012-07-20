@@ -1,3 +1,4 @@
+
 JGL <-
 function(Y,penalty="fused",lambda1,lambda2,rho=1,weights="equal",penalize.diagonal=FALSE,maxiter=500,tol=1e-5,warm=NULL,return.whole.theta=FALSE, screening="fast")
 {
@@ -96,11 +97,20 @@ function(Y,penalty="fused",lambda1,lambda2,rho=1,weights="equal",penalize.diagon
 	blocklist = list()
 	# identify unconnected elements, and get blocks:
 	unconnected = c()
-	for(i in 1:cout$no)
+#	for(i in 2:(cout$no+1))
+#	{
+#		if(sum(cout$membership==(i-1))==1) { unconnected <- c(unconnected,which(cout$membership==(i-1))) }
+#		if(sum(cout$membership==(i-1))>1) { blocklist[[length(blocklist)+1]] <- which(cout$membership==(i-1)) }
+#	}
+	
+	# adapt cout$membership to start with index 1:
+	if(min(cout$membership)==0){cout$membership=cout$membership+1}
+	for(i in 1:(cout$no))
 	{
-		if(sum(cout$membership==(i-1))==1) { unconnected <- c(unconnected,which(cout$membership==(i-1))) }
-		if(sum(cout$membership==(i-1))>1) { blocklist[[length(blocklist)+1]] <- which(cout$membership==(i-1)) }
+		if(sum(cout$membership==i)==1) { unconnected <- c(unconnected,which(cout$membership==i)) }
+		if(sum(cout$membership==i)>1) { blocklist[[length(blocklist)+1]] <- which(cout$membership==i) }
 	}
+
 	# final set of connected nodes
 	connected[unconnected] = FALSE
 	# connected indices of connected nodes:  0 for unconnected nodes, and 1:length(connected) for the rest.  
@@ -117,7 +127,10 @@ function(Y,penalty="fused",lambda1,lambda2,rho=1,weights="equal",penalize.diagon
 	for(k in 1:K) 
 	{
 		theta[[k]] = matrix(0,sum(connected),sum(connected))
-		dimnames(theta[[k]])[[1]]=dimnames(theta[[k]])[[2]]=dimnames(Y[[k]])[[2]][connected]	
+		if(sum(connected)>0)
+		{
+			dimnames(theta[[k]])[[1]]=dimnames(theta[[k]])[[2]]=dimnames(Y[[k]])[[2]][connected]	
+		}
 	}
 
 	## get solution on unconnected nodes
@@ -179,11 +192,13 @@ function(Y,penalty="fused",lambda1,lambda2,rho=1,weights="equal",penalize.diagon
 	}}
 
 	# round very small theta entries down to zero:
+	if(dim(theta[[1]])[1]>0)
+	{
 	for(k in 1:K)
 	{
 		rounddown = abs(theta[[k]])<1e-5; diag(rounddown)=FALSE
 		theta[[k]]=theta[[k]]*(1-rounddown)
-	}
+	}}
 
 	# update connected:
 	#stillconnected = rep(FALSE,length(connected))
