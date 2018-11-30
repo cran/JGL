@@ -235,7 +235,6 @@ function(x,...)
 .env = "environment: namespace:JGL"
 #UseMethod("plot")
 theta=x$theta
-library(igraph)
 K=length(theta)
 adj = make.adj.matrix(theta)
 diag(adj)=0
@@ -248,7 +247,7 @@ plot(gadj, vertex.frame.color="white",layout=layout.fruchterman.reingold,
 }
 
 
-print.jgl <-
+print.jgl <-  
 function(x, ...)
 {
 #	.env = "environment: namespace:JGL"
@@ -283,5 +282,4 @@ function(x, ...)
 	for(k in 1:K) {norm[k] = sum(abs(x$theta[[k]]))-sum(abs(diag(x$theta[[k]])))}
 	cat("L1 norm of off-diagonal elements of classes' Thetas: ", norm, "\n")
 }
-
 
