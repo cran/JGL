@@ -2,8 +2,8 @@ Package: JGL
 Type: Package
 Title: Performs the Joint Graphical Lasso for Sparse Inverse Covariance
         Estimation on Multiple Classes
-Version: 2.3.1
-Date: 2018-11-30
+Version: 2.3.2
+Date: 2023-12-04
 Author: Patrick Danaher
 Maintainer: Patrick Danaher <pdanaher@uw.edu>
 Description: The Joint Graphical Lasso is a generalized method for
@@ -17,10 +17,11 @@ Description: The Joint Graphical Lasso is a generalized method for
         most applications. Reference: Danaher P, Wang P, Witten DM. (2013) 
         <doi:10.1111/rssb.12033>.
 Depends: igraph
-License: GPL-2
+License: MIT + file LICENSE
 LazyLoad: yes
-Packaged: 2018-11-30 23:16:39 UTC; pdanaher
+Packaged: 2023-12-19 00:02:36 UTC; pdanaher
 NeedsCompilation: no
 Repository: CRAN
-Date/Publication: 2018-11-30 23:40:15 UTC
-RoxygenNote: 6.1.0
+Date/Publication: 2023-12-19 05:50:06 UTC
+RoxygenNote: 7.2.3
+Encoding: UTF-8
